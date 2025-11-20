@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Degree From Amity Online University - India's #1 Choice</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #002147;
+        }
+
+        .nav-logo img {
+            height: 45px;
+            width: auto;
+            margin-right: 12px;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .nav-logo-main {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .nav-logo-sub {
+            font-size: 0.8rem;
+            color: #FFC107;
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #002147;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a:hover {
+            color: #FFC107;
+        }
+
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #FFC107;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: #FFC107;
+            color: #002147;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #002147;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-menu li {
+            margin: 15px 0;
+        }
+
+        .mobile-menu a {
+            color: #002147;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 10px 0;
+        }
+
+        .mobile-cta {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Floating Apply Button */
+        .floating-apply {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #FFC107;
+            color: #002147;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Adjust body for navbar */
+        body {
+            padding-top: 80px;
+        }
+
+        /* Section Spacing */
+        .section {
+            padding: 80px 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #FFC107;
+            color: #002147;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        .deadline-text {
+            color: #e74c3c;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* University Section */
+        .university-section {
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .university-section h2 {
+            font-size: 2.5rem;
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .university-section p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .accreditation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .accreditation-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .accreditation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .accreditation-card i {
+            font-size: 2.5rem;
+            color: #002147;
+            margin-bottom: 15px;
+        }
+
+        .accreditation-card h4 {
+            color: #002147;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            background: #F5F7FA;
+        }
+
+        .why-choose h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: #FFC107;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Certificate Section */
+        .certificate-section {
+            background: white;
+        }
+
+        .certificate-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .certificate-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .certificate-text {
+            background: #002147;
+            padding: 50px 40px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .certificate-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .certificate-text p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            padding: 8px 0;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .benefits-list li i {
+            color: #FFC107;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Programs Section */
+        .programs-section {
+            background: #F5F7FA;
+        }
+
+        .programs-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .program-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            border: 2px solid #002147;
+            background: white;
+            color: #002147;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: #002147;
+            color: white;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .program-content {
+            padding: 25px;
+        }
+
+        .specialization-badge {
+            background: #FFC107;
+            color: #002147;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .program-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 15px;
+        }
+
+        .program-details {
+            margin-bottom: 20px;
+        }
+
+        .program-details p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+
+        .program-card .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Admission Process */
+        .admission-process {
+            background: white;
+        }
+
+        .admission-process h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: #FFC107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #002147;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #002147;
+            margin-bottom: 10px;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Partner Logos */
+        .partners-section {
+            background: #F5F7FA;
+        }
+
+        .partners-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .partners-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+
+        .partner-logo {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .partner-logo img {
+            max-width: 120px;
+            max-height: 60px;
+            object-fit: contain;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: #002147;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-text {
+            color: white;
+        }
+
+        .contact-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .contact-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 40px 0 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #002147;
+        }
+
+        .disclaimer {
+            color: #888;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-logo-text {
+                display: none;
+            }
+
+            .nav-logo img {
+                margin-right: 0;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .certificate-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .accreditation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .partners-slider {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .program-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .floating-apply {
+                top: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .university-section h2,
+            .why-choose h2,
+            .programs-section h2,
+            .admission-process h2,
+            .partners-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-container {
+                padding: 12px 15px;
+            }
+
+            body {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" alt="Amity Online University Logo">
+                <div class="nav-logo-text">
+                    <span class="nav-logo-main">Amity Online</span>
+                    <span class="nav-logo-sub">University</span>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#admissions">Admissions</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a onclick="openApplicationForm()" class="nav-cta">Apply Now</a></li>
+            </ul>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#admissions">Admissions</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-cta">
+                <a onclick="openApplicationForm()" class="nav-cta">Apply Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Apply Button -->
+    <a onclick="openApplicationForm()" class="floating-apply">Apply Now</a>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Online Degree From Amity Online University</h1>
+                    <p>India's #1 Choice for Online Degree Programs</p>
+                    <div class="hero-buttons">
+                        <a href="#brochure" class="btn btn-primary">Download Brochure</a>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                    <div class="deadline-text">Admission Closing in 5 Days</div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Amity University Campus">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- University Section -->
+    <section class="university-section section" id="about">
+        <div class="container">
+            <h2>Amity Online University</h2>
+            <p>How about getting a degree from the top ranked university?</p>
+            <div class="accreditation-grid">
+                <div class="accreditation-card">
+                    <i class="fas fa-university"></i>
+                    <h4>Association of Commonwealth Universities (ACU)</h4>
+                </div>
+                <div class="accreditation-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4>International Credential Assessment Service of Canada</h4>
+                </div>
+                <div class="accreditation-card">
+                    <i class="fas fa-award"></i>
+                    <h4>International Qualifications Assessment Service</h4>
+                </div>
+                <div class="accreditation-card">
+                    <i class="fas fa-medal"></i>
+                    <h4>International Credential Evaluation Service</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Amity Online -->
+    <section class="why-choose section">
+        <div class="container">
+            <h2>Why Choose Amity Online?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-play-circle"></i>
+                    <h3>Diverse learning mediums</h3>
+                    <p>Multiple formats including videos, interactive content, and live sessions for comprehensive learning.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Dedicated Academic Advisor</h3>
+                    <p>Personal guidance throughout your academic journey with experienced mentors.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI-Professor AMI</h3>
+                    <p>Intelligent tutoring system providing personalized learning assistance 24/7.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Career Services</h3>
+                    <p>Comprehensive career support including placement assistance and skill development.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Doorstep delivery of books</h3>
+                    <p>Physical study materials delivered directly to your home for convenient learning.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-vr-cardboard"></i>
+                    <h3>Metaverse Campus</h3>
+                    <p>Immersive virtual campus experience with cutting-edge technology.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Offline Experiences</h3>
+                    <p>Regular offline events, workshops, and networking opportunities.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Placement opportunities</h3>
+                    <p>Strong industry connections ensuring excellent placement prospects for graduates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Section -->
+    <section class="certificate-section section">
+        <div class="container">
+            <div class="certificate-content">
+                <div class="certificate-image">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Degree Certificate">
+                </div>
+                <div class="certificate-text">
+                    <h2>Online Degree from Amity Online University</h2>
+                    <p>Get a globally recognized degree that opens doors to endless opportunities. Our comprehensive online programs are designed to provide world-class education with industry-relevant curriculum.</p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i>Daily LIVE classes by International Faculty</li>
+                        <li><i class="fas fa-check-circle"></i>Exclusive Virtual Job Fairs</li>
+                        <li><i class="fas fa-check-circle"></i>Accredited by Ivy League Universities</li>
+                        <li><i class="fas fa-check-circle"></i>Hands-on Learning with world-class LMS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section section" id="programs">
+        <div class="container">
+            <h2>Online Master's & Bachelor's Program</h2>
+            <div class="program-tabs">
+                <button class="tab-btn active">All Courses</button>
+                <button class="tab-btn">Popular Courses</button>
+                <button class="tab-btn">UG Courses</button>
+                <button class="tab-btn">PG Courses</button>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="MBA Program">
+                    <div class="program-content">
+                        <span class="specialization-badge">15+ Specializations</span>
+                        <h3 class="program-title">Master of Business Administration</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> Bachelor's Degree</p>
+                            <p><strong>Duration:</strong> 2 Years</p>
+                            <p><strong>Fees:</strong> ₹75,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="M.Com Program">
+                    <div class="program-content">
+                        <span class="specialization-badge">8+ Specializations</span>
+                        <h3 class="program-title">Online M.Com</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> B.Com/BBA</p>
+                            <p><strong>Duration:</strong> 2 Years</p>
+                            <p><strong>Fees:</strong> ₹45,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="MCA Program">
+                    <div class="program-content">
+                        <span class="specialization-badge">12+ Specializations</span>
+                        <h3 class="program-title">Online MCA</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> BCA/B.Sc IT</p>
+                            <p><strong>Duration:</strong> 2 Years</p>
+                            <p><strong>Fees:</strong> ₹65,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="M.Sc Program">
+                    <div class="program-content">
+                        <span class="specialization-badge">10+ Specializations</span>
+                        <h3 class="program-title">Online M.Sc</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> B.Sc in relevant field</p>
+                            <p><strong>Duration:</strong> 2 Years</p>
+                            <p><strong>Fees:</strong> ₹55,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="MA Journalism">
+                    <div class="program-content">
+                        <span class="specialization-badge">6+ Specializations</span>
+                        <h3 class="program-title">MA Journalism & Mass Comm</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> Bachelor's Degree</p>
+                            <p><strong>Duration:</strong> 2 Years</p>
+                            <p><strong>Fees:</strong> ₹50,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="BBA Program">
+                    <div class="program-content">
+                        <span class="specialization-badge">12+ Specializations</span>
+                        <h3 class="program-title">BBA</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> 12th Pass</p>
+                            <p><strong>Duration:</strong> 3 Years</p>
+                            <p><strong>Fees:</strong> ₹40,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="BCA Program">
+                    <div class="program-content">
+                        <span class="specialization-badge">8+ Specializations</span>
+                        <h3 class="program-title">BCA</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> 12th Pass</p>
+                            <p><strong>Duration:</strong> 3 Years</p>
+                            <p><strong>Fees:</strong> ₹45,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="BA Program">
+                    <div class="program-content">
+                        <span class="specialization-badge">15+ Specializations</span>
+                        <h3 class="program-title">BA</h3>
+                        <div class="program-details">
+                            <p><strong>Eligibility:</strong> 12th Pass</p>
+                            <p><strong>Duration:</strong> 3 Years</p>
+                            <p><strong>Fees:</strong> ₹35,000 per semester</p>
+                        </div>
+                        <a onclick="openApplicationForm()" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admission Process -->
+    <section class="admission-process section" id="admissions">
+        <div class="container">
+            <h2>Admission Process</h2>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="step-title">Register</h3>
+                    <p class="step-description">Create your account and start your journey</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3 class="step-title">Fill Details</h3>
+                    <p class="step-description">Complete your application form with accurate information</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3 class="step-title">Upload Documents</h3>
+                    <p class="step-description">Submit all required academic documents</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                

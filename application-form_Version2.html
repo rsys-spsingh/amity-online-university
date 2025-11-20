@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Now - Amity Online University Application Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: #002147;
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-content {
+            padding: 40px 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #002147;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FFC107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+        }
+
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .country-code {
+            flex: 0 0 120px;
+        }
+
+        .phone-number {
+            flex: 1;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #FFC107;
+            color: #002147;
+            padding: 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-note {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            border-left: 4px solid #FFC107;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: #e74c3c;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #002147;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .form-content {
+                padding: 30px 20px;
+            }
+
+            .form-header {
+                padding: 30px 20px;
+            }
+
+            .form-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .phone-group {
+                flex-direction: column;
+            }
+
+            .country-code {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .form-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Application Form</h1>
+            <p>Start your journey with Amity Online University</p>
+        </div>
+
+        <div class="form-content">
+            <form id="applicationForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <div class="error-message">Please enter your first name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <div class="error-message">Please enter your last name</div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <div class="phone-group">
+                            <select id="countryCode" name="countryCode" class="country-code" required>
+                                <option value="+91">+91 (India)</option>
+                                <option value="+1">+1 (USA)</option>
+                                <option value="+1">+1 (Canada)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+61">+61 (Australia)</option>
+                                <option value="+65">+65 (Singapore)</option>
+                                <option value="+971">+971 (UAE)</option>
+                                <option value="+966">+966 (Saudi Arabia)</option>
+                                <option value="+974">+974 (Qatar)</option>
+                                <option value="+965">+965 (Kuwait)</option>
+                                <option value="+968">+968 (Oman)</option>
+                                <option value="+973">+973 (Bahrain)</option>
+                                <option value="+49">+49 (Germany)</option>
+                                <option value="+33">+33 (France)</option>
+                                <option value="+39">+39 (Italy)</option>
+                                <option value="+34">+34 (Spain)</option>
+                                <option value="+31">+31 (Netherlands)</option>
+                                <option value="+46">+46 (Sweden)</option>
+                                <option value="+47">+47 (Norway)</option>
+                                <option value="+45">+45 (Denmark)</option>
+                                <option value="+41">+41 (Switzerland)</option>
+                                <option value="+43">+43 (Austria)</option>
+                                <option value="+32">+32 (Belgium)</option>
+                                <option value="+81">+81 (Japan)</option>
+                                <option value="+82">+82 (South Korea)</option>
+                                <option value="+86">+86 (China)</option>
+                                <option value="+852">+852 (Hong Kong)</option>
+                                <option value="+60">+60 (Malaysia)</option>
+                                <option value="+66">+66 (Thailand)</option>
+                                <option value="+84">+84 (Vietnam)</option>
+                                <option value="+62">+62 (Indonesia)</option>
+                                <option value="+63">+63 (Philippines)</option>
+                                <option value="+94">+94 (Sri Lanka)</option>
+                                <option value="+880">+880 (Bangladesh)</option>
+                                <option value="+977">+977 (Nepal)</option>
+                            </select>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" 
+                                   placeholder="Enter 10-digit number" 
+                                   pattern="[0-9]{10}" 
+                                   maxlength="10" 
+                                   class="phone-number" required>
+                        </div>
+                        <div class="error-message">Please enter a valid 10-digit phone number</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="course">Select Course <span class="required">*</span></label>
+                        <select id="course" name="course" required>
+                            <option value="">Choose your course</option>
+                            <optgroup label="Master's Programs">
+                                <option value="mba">Master of Business Administration (MBA)</option>
+                                <option value="mcom">Master of Commerce (M.Com)</option>
+                                <option value="mca">Master of Computer Applications (MCA)</option>
+                                <option value="msc-it">Master of Science in Information Technology</option>
+                                <option value="msc-cs">Master of Science in Computer Science</option>
+                                <option value="msc-ds">Master of Science in Data Science</option>
+                                <option value="ma-journalism">Master of Arts in Journalism & Mass Communication</option>
+                                <option value="ma-english">Master of Arts in English</option>
+                                <option value="ma-psychology">Master of Arts in Psychology</option>
+                                <option value="ma-economics">Master of Arts in Economics</option>
+                                <option value="ma-political-science">Master of Arts in Political Science</option>
+                                <option value="ma-sociology">Master of Arts in Sociology</option>
+                                <option value="ma-history">Master of Arts in History</option>
+                            </optgroup>
+                            <optgroup label="Bachelor's Programs">
+                                <option value="bba">Bachelor of Business Administration (BBA)</option>
+                                <option value="bca">Bachelor of Computer Applications (BCA)</option>
+                                <option value="bcom">Bachelor of Commerce (B.Com)</option>
+                                <option value="ba">Bachelor of Arts (BA)</option>
+                                <option value="ba-english">Bachelor of Arts in English</option>
+                                <option value="ba-psychology">Bachelor of Arts in Psychology</option>
+                                <option value="ba-economics">Bachelor of Arts in Economics</option>
+                                <option value="ba-political-science">Bachelor of Arts in Political Science</option>
+                                <option value="ba-sociology">Bachelor of Arts in Sociology</option>
+                                <option value="ba-history">Bachelor of Arts in History</option>
+                                <option value="ba-journalism">Bachelor of Arts in Journalism & Mass Communication</option>
+                                <option value="bsc-it">Bachelor of Science in Information Technology</option>
+                                <option value="bsc-cs">Bachelor of Science in Computer Science</option>
+                            </optgroup>
+                        </select>
+                        <div class="error-message">Please select a course</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">Select State <span class="required">*</span></label>
+                        <select id="state" name="state" required>
+                            <option value="">Choose your state</option>
+                            <option value="andhra-pradesh">Andhra Pradesh</option>
+                            <option value="arunachal-pradesh">Arunachal Pradesh</option>
+                            <option value="assam">Assam</option>
+                            <option value="bihar">Bihar</option>
+                            <option value="chhattisgarh">Chhattisgarh</option>
+                            <option value="goa">Goa</option>
+                            <option value="gujarat">Gujarat</option>
+                            <option value="haryana">Haryana</option>
+                            <option value="himachal-pradesh">Himachal Pradesh</option>
+                            <option value="jharkhand">Jharkhand</option>
+                            <option value="karnataka">Karnataka</option>
+                            <option value="kerala">Kerala</option>
+                            <option value="madhya-pradesh">Madhya Pradesh</option>
+                            <option value="maharashtra">Maharashtra</option>
+                            <option value="manipur">Manipur</option>
+                            <option value="meghalaya">Meghalaya</option>
+                            <option value="mizoram">Mizoram</option>
+                            <option value="nagaland">Nagaland</option>
+                            <option value="odisha">Odisha</option>
+                            <option value="punjab">Punjab</option>
+                            <option value="rajasthan">Rajasthan</option>
+                            <option value="sikkim">Sikkim</option>
+                            <option value="tamil-nadu">Tamil Nadu</option>
+                            <option value="telangana">Telangana</option>
+                            <option value="tripura">Tripura</option>
+                            <option value="uttar-pradesh">Uttar Pradesh</option>
+                            <option value="uttarakhand">Uttarakhand</option>
+                            <option value="west-bengal">West Bengal</option>
+                            <optgroup label="Union Territories">
+                                <option value="andaman-nicobar">Andaman and Nicobar Islands</option>
+                                <option value="chandigarh">Chandigarh</option>
+                                <option value="dadra-nagar-haveli">Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="jammu-kashmir">Jammu and Kashmir</option>
+                                <option value="ladakh">Ladakh</option>
+                                <option value="lakshadweep">Lakshadweep</option>
+                                <option value="puducherry">Puducherry</option>
+                            </optgroup>
+                            <optgroup label="International">
+                                <option value="other">Other (Outside India)</option>
+                            </optgroup>
+                        </select>
+                        <div class="error-message">Please select your state</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <div class="btn-content">
+                        <div class="loading-spinner" id="loadingSpinner"></div>
+                        <span id="btnText">Submit Application</span>
+                    </div>
+                </button>
+
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                    Thank you! Your application has been submitted successfully. Our admissions team will contact you within 24 hours.
+                </div>
+            </form>
+
+            <div class="form-note">
+                <strong>Note:</strong> All fields marked with <span class="required">*</span> are mandatory. 
+                Make sure to provide accurate information as it will be used for verification purposes. 
+                Your personal information is secure and will only be used for admission-related communication.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and submission
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateForm()) {
+                submitForm();
+            }
+        });
+
+        // Phone number input validation (only numbers)
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Real-time validation
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+
+            input.addEventListener('input', function() {
+                if (this.parentElement.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        function validateField(field) {
+            const formGroup = field.closest('.form-group');
+            const isValid = field.checkValidity();
+            
+            if (field.name === 'phoneNumber') {
+                const phoneValid = /^[0-9]{10}$/.test(field.value);
+                if (!phoneValid && field.value.length > 0) {
+                    formGroup.classList.add('error');
+                    return false;
+                }
+            }
+
+            if (field.name === 'firstName' || field.name === 'lastName') {
+                const nameValid = /^[a-zA-Z\s]{2,}$/.test(field.value);
+                if (!nameValid && field.value.length > 0) {
+                    formGroup.classList.add('error');
+                    return false;
+                }
+            }
+
+            if (isValid && field.value.trim() !== '') {
+                formGroup.classList.remove('error');
+                return true;
+            } else if (field.hasAttribute('required')) {
+                formGroup.classList.add('error');
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = document.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+
+            // Special validation for phone number
+            const phoneNumber = document.getElementById('phoneNumber');
+            if (phoneNumber.value.length !== 10) {
+                phoneNumber.closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function submitForm() {
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const btnText = document.getElementById('btnText');
+            const successMessage = document.getElementById('successMessage');
+
+            // Show loading state
+            submitBtn.disabled = true;
+            loadingSpinner.style.display = 'block';
+            btnText.textContent = 'Submitting...';
+
+            // Get form data
+            const formData = new FormData(document.getElementById('applicationForm'));
+            const applicationData = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                countryCode: formData.get('countryCode'),
+                phoneNumber: formData.get('phoneNumber'),
+                course: formData.get('course'),
+                state: formData.get('state'),
+                submissionDate: new Date().toISOString(),
+                applicationId: 'AMT' + Date.now()
+            };
+
+            // Simulate API call (replace with actual API endpoint)
+            setTimeout(() => {
+                // Store data in localStorage for demo purposes
+                localStorage.setItem('amityApplication_' + applicationData.applicationId, JSON.stringify(applicationData));
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                document.getElementById('applicationForm').style.display = 'none';
+                
+                // Reset button state
+                submitBtn.disabled = false;
+                loadingSpinner.style.display = 'none';
+                btnText.textContent = 'Submit Application';
+
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                console.log('Application submitted:', applicationData);
+            }, 2000);
+        }
+
+        // Auto-format name fields (capitalize first letter)
+        document.getElementById('firstName').addEventListener('input', function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+            this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();
+        });
+
+        document.getElementById('lastName').addEventListener('input', function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+            this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();
+        });
+    </script>
+</body>
+</html>
