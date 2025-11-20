@@ -191,7 +191,7 @@
 
         /* Form Styles */
         .form-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
             background: white;
             border-radius: 12px;
@@ -218,19 +218,23 @@
         }
 
         .form-content {
-            padding: 40px 30px;
+            padding: 50px 40px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 30px;
             margin-bottom: 30px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .form-group.full-width {
@@ -240,8 +244,8 @@
         .form-group label {
             font-weight: 600;
             color: #002147;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            margin-bottom: 10px;
+            font-size: 1rem;
         }
 
         .required {
@@ -250,12 +254,14 @@
 
         .form-group input,
         .form-group select {
-            padding: 15px;
+            padding: 16px;
             border: 2px solid #e9ecef;
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s ease;
             background: white;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .form-group input:focus,
@@ -267,15 +273,18 @@
 
         .phone-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            width: 100%;
         }
 
         .country-code {
-            flex: 0 0 120px;
+            flex: 0 0 130px;
+            min-width: 130px;
         }
 
         .phone-number {
             flex: 1;
+            min-width: 0;
         }
 
         .form-group select {
@@ -292,10 +301,10 @@
             width: 100%;
             background: #FFC107;
             color: #002147;
-            padding: 18px;
+            padding: 20px;
             border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -304,7 +313,7 @@
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
         }
 
         .submit-btn:disabled {
@@ -315,18 +324,19 @@
 
         .form-note {
             background: #f8f9fa;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
-            margin-top: 20px;
-            font-size: 0.9rem;
+            margin-top: 30px;
+            font-size: 0.95rem;
             color: #666;
             border-left: 4px solid #FFC107;
+            line-height: 1.6;
         }
 
         .error-message {
             color: #e74c3c;
             font-size: 0.85rem;
-            margin-top: 5px;
+            margin-top: 8px;
             display: none;
         }
 
@@ -342,11 +352,12 @@
         .success-message {
             background: #d4edda;
             color: #155724;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             margin-top: 20px;
             border: 1px solid #c3e6cb;
             display: none;
+            font-size: 1.1rem;
         }
 
         .loading-spinner {
@@ -376,7 +387,7 @@
             background: white;
             padding: 40px 0 20px;
             border-top: 1px solid #e9ecef;
-            margin-top: 60px;
+            margin-top: 80px;
         }
 
         .footer-content {
@@ -403,6 +414,9 @@
             font-size: 0.8rem;
             line-height: 1.5;
             margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .copyright {
@@ -411,6 +425,17 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .form-content {
+                padding: 40px 30px;
+            }
+            
+            .form-container {
+                max-width: 800px;
+                margin: 30px auto;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -430,31 +455,38 @@
 
             .form-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 25px;
             }
 
             .form-content {
-                padding: 30px 20px;
+                padding: 30px 25px;
             }
 
             .form-header {
-                padding: 30px 20px;
+                padding: 30px 25px;
             }
 
             .form-header h1 {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
             }
 
             .phone-group {
                 flex-direction: column;
+                gap: 15px;
             }
 
             .country-code {
                 flex: 1;
+                min-width: auto;
             }
 
             .form-container {
-                margin: 20px auto;
+                margin: 20px 15px;
+            }
+
+            .submit-btn {
+                padding: 18px;
+                font-size: 1.1rem;
             }
         }
 
@@ -468,7 +500,7 @@
             }
 
             .form-header h1 {
-                font-size: 1.6rem;
+                font-size: 1.7rem;
             }
 
             .nav-container {
@@ -476,16 +508,38 @@
             }
 
             .form-container {
-                margin: 10px;
+                margin: 15px 10px;
                 border-radius: 8px;
             }
 
             .form-content {
-                padding: 25px 15px;
+                padding: 25px 20px;
             }
 
             .form-header {
-                padding: 25px 15px;
+                padding: 25px 20px;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 14px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .form-note {
+                padding: 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Fix for very wide screens */
+        @media (min-width: 1200px) {
+            .form-container {
+                max-width: 1000px;
+            }
+            
+            .form-content {
+                padding: 60px 50px;
             }
         }
     </style>
@@ -675,7 +729,7 @@
 
                     <div class="success-message" id="successMessage">
                         <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
-                        Thank you! Your application has been submitted successfully. Our admissions team will contact you within 24 hours.
+                        <strong>Thank you!</strong> Your application has been submitted successfully. Our admissions team will contact you within 24 hours.
                     </div>
                 </form>
 
@@ -767,7 +821,8 @@
             });
 
             input.addEventListener('input', function() {
-                if (this.parentElement.classList.contains('error')) {
+                if (this.parentElement.classList.contains('error') || 
+                    this.closest('.form-group').classList.contains('error')) {
                     validateField(this);
                 }
             });
