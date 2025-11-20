@@ -67,23 +67,6 @@
             margin-right: 12px;
         }
 
-        .nav-logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .nav-logo-main {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .nav-logo-sub {
-            font-size: 0.8rem;
-            color: #FFC107;
-            font-weight: 500;
-        }
-
         .nav-menu {
             display: flex;
             list-style: none;
@@ -550,10 +533,7 @@
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <img src="assets/images/logo.png" alt="Amity Online University Logo" onerror="this.src='https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80'">
-                <div class="nav-logo-text">
-                    <span class="nav-logo-main">Amity Online</span>
-                    <span class="nav-logo-sub">University</span>
-                </div>
+                
             </a>
             
             <ul class="nav-menu">
@@ -892,37 +872,48 @@
 
             // Get form data
             const formData = new FormData(document.getElementById('applicationForm'));
-            const applicationData = {
-                firstName: formData.get('firstName'),
-                lastName: formData.get('lastName'),
-                email: formData.get('email'),
-                countryCode: formData.get('countryCode'),
-                phoneNumber: formData.get('phoneNumber'),
-                course: formData.get('course'),
-                state: formData.get('state'),
-                submissionDate: new Date().toISOString(),
-                applicationId: 'AMT' + Date.now()
-            };
 
-            // Simulate API call (replace with actual API endpoint)
-            setTimeout(() => {
-                // Store data in localStorage for demo purposes
-                localStorage.setItem('amityApplication_' + applicationData.applicationId, JSON.stringify(applicationData));
-                
-                // Show success message
-                successMessage.style.display = 'block';
-                document.getElementById('applicationForm').style.display = 'none';
-                
+            // Submit to PHP backend
+            fetch('submit.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    successMessage.innerHTML = `
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <strong>Thank you!</strong> Your application has been submitted successfully. 
+                        Your Application ID is: <strong>${data.applicationId}</strong>
+                        <br>Our admissions team will contact you within 24 hours.
+                    `;
+                    successMessage.style.display = 'block';
+                    document.getElementById('applicationForm').style.display = 'none';
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // Handle errors
+                    let errorMessage = 'Submission failed. ';
+                    if (data.errors && Array.isArray(data.errors)) {
+                        errorMessage += data.errors.join(', ');
+                    } else if (data.message) {
+                        errorMessage += data.message;
+                    }
+                    alert(errorMessage);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Network error. Please check your internet connection and try again.');
+            })
+            .finally(() => {
                 // Reset button state
                 submitBtn.disabled = false;
                 loadingSpinner.style.display = 'none';
                 btnText.textContent = 'Submit Application';
-
-                // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-
-                console.log('Application submitted:', applicationData);
-            }, 2000);
+            });
         }
 
         // Auto-format name fields (capitalize first letter)
