@@ -67,23 +67,6 @@
             margin-right: 12px;
         }
 
-        .nav-logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .nav-logo-main {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .nav-logo-sub {
-            font-size: 0.8rem;
-            color: #FFC107;
-            font-weight: 500;
-        }
-
         .nav-menu {
             display: flex;
             list-style: none;
@@ -542,6 +525,24 @@
                 padding: 60px 50px;
             }
         }
+        /* Add styles for form messages (success / error) */
+        .form-message {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
@@ -550,10 +551,7 @@
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <img src="assets/images/logo.png" alt="Amity Online University Logo" onerror="this.src='https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80'">
-                <div class="nav-logo-text">
-                    <span class="nav-logo-main">Amity Online</span>
-                    <span class="nav-logo-sub">University</span>
-                </div>
+                
             </a>
             
             <ul class="nav-menu">
@@ -802,7 +800,13 @@
         // Form validation and submission
         document.getElementById('applicationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
+            // Remove any existing error message container
+            const existingError = document.querySelector('.error-message-div');
+            if (existingError) {
+                existingError.remove();
+            }
+
             if (validateForm()) {
                 submitForm();
             }
@@ -892,37 +896,94 @@
 
             // Get form data
             const formData = new FormData(document.getElementById('applicationForm'));
-            const applicationData = {
-                firstName: formData.get('firstName'),
-                lastName: formData.get('lastName'),
-                email: formData.get('email'),
-                countryCode: formData.get('countryCode'),
-                phoneNumber: formData.get('phoneNumber'),
-                course: formData.get('course'),
-                state: formData.get('state'),
-                submissionDate: new Date().toISOString(),
-                applicationId: 'AMT' + Date.now()
-            };
 
-            // Simulate API call (replace with actual API endpoint)
-            setTimeout(() => {
-                // Store data in localStorage for demo purposes
-                localStorage.setItem('amityApplication_' + applicationData.applicationId, JSON.stringify(applicationData));
+            // Debug: Log form data
+            console.log('Form Data:');
+            for (let [key, value] of formData.entries()) {
+                console.log(key + ':', value);
+            }
+
+            // Submit to PHP backend
+            fetch('submit.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                return response.text(); // Get raw response first
+            })
+            .then(text => {
+                console.log('Raw response:', text);
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Invalid JSON response: ' + text);
+                }
+            })
+            .then(data => {
+                console.log('Parsed data:', data);
                 
-                // Show success message
-                successMessage.style.display = 'block';
-                document.getElementById('applicationForm').style.display = 'none';
-                
+                if (data.success) {
+                    // Show success message
+                    successMessage.innerHTML = `
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <strong>Thank you!</strong> Your application has been submitted successfully. 
+                        Your Application ID is: <strong>${data.applicationId}</strong>
+                        <br><br>Our admissions team will contact you within 24 hours.
+                    `;
+                    successMessage.style.display = 'block';
+                    successMessage.className = 'form-message success';
+                    document.getElementById('applicationForm').style.display = 'none';
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // Handle errors
+                    let errorMessage = 'Submission failed:<br>';
+                    if (data.errors && Array.isArray(data.errors)) {
+                        errorMessage += '<ul><li>' + data.errors.join('</li><li>') + '</li></ul>';
+                    } else if (data.message) {
+                        errorMessage += data.message;
+                    }
+                    
+                    // Show error message
+                    showErrorMessage(errorMessage);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showErrorMessage('Network error: ' + error.message + '<br>Please check your internet connection and try again.');
+            })
+            .finally(() => {
                 // Reset button state
                 submitBtn.disabled = false;
                 loadingSpinner.style.display = 'none';
                 btnText.textContent = 'Submit Application';
+            });
+        }
 
-                // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-
-                console.log('Application submitted:', applicationData);
-            }, 2000);
+        function showErrorMessage(message) {
+            const formContent = document.querySelector('.form-content');
+            let errorDiv = document.querySelector('.error-message-div');
+            
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.className = 'form-message error error-message-div';
+                formContent.appendChild(errorDiv);
+            }
+            
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>' + message;
+            errorDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide error message after 10 seconds
+            setTimeout(() => {
+                if (errorDiv) {
+                    errorDiv.style.display = 'none';
+                }
+            }, 10000);
         }
 
         // Auto-format name fields (capitalize first letter)

@@ -68,22 +68,6 @@
             object-fit: contain;
         }
 
-        .nav-logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .nav-logo-main {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .nav-logo-sub {
-            font-size: 0.85rem;
-            color: #FFC107;
-            font-weight: 500;
-        }
 
         .nav-menu {
             display: flex;
@@ -547,14 +531,30 @@
         }
 
         .process-timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            position: relative;
+            display: flex;
             gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* horizontal connector line */
+        .process-timeline::before {
+            content: "";
+            position: absolute;
+            left: 5%;
+            right: 5%;
+            top: 48px; /* aligns with center of .step-icon (80px height) */
+            height: 4px;
+            background: #e9ecef;
+            z-index: 0;
+            border-radius: 2px;
         }
 
         .process-step {
             text-align: center;
             position: relative;
+            flex: 1 1 200px;
+            z-index: 1; /* keep steps above the connector line */
         }
 
         .step-icon {
@@ -568,6 +568,10 @@
             margin: 0 auto 20px;
             font-size: 2rem;
             color: #002147;
+            position: relative;
+            z-index: 2;
+            border: 6px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         .step-title {
@@ -595,25 +599,47 @@
             margin-bottom: 50px;
         }
 
+        /* Partners slider (horizontal auto-scroll) */
         .partners-slider {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .partners-track {
+            display: flex;
             gap: 40px;
             align-items: center;
+            padding: 10px 0;
+            will-change: transform;
+            animation: partners-scroll 20s linear infinite;
+        }
+
+        .partners-slider:hover .partners-track {
+            animation-play-state: paused;
         }
 
         .partner-logo {
+            flex: 0 0 auto;
             text-align: center;
-            padding: 20px;
+            padding: 16px 24px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .partner-logo img {
-            max-width: 120px;
+            max-width: 140px;
             max-height: 60px;
             object-fit: contain;
+            display: block;
+        }
+
+        @keyframes partners-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* Contact Section */
@@ -755,7 +781,12 @@
             }
 
             .process-timeline {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .process-timeline::before {
+                display: none;
             }
 
             .partners-slider {
@@ -826,10 +857,6 @@
         <div class="nav-container">
             <a href="#home" class="nav-logo">
                 <img src="assets/images/logo.png" alt="Amity Online University Logo" onerror="this.src='https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80'">
-                <div class="nav-logo-text">
-                    <span class="nav-logo-main">Amity Online</span>
-                    <span class="nav-logo-sub">University</span>
-                </div>
             </a>
             
             <ul class="nav-menu">
@@ -1138,19 +1165,40 @@
     <!-- Partners Section -->
     <section class="partners-section section">
         <div class="container">
-            <h2>Our learners works at</h2>
+            <h2>Our learners work at</h2>
             <div class="partners-slider">
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Nokia_wordmark.svg" alt="Nokia">
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg" alt="HDFC">
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/SpiceJet_logo.svg" alt="SpiceJet">
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/SBI_LIFE_LOGO.svg" alt="SBI Life">
+                <div class="partners-track">
+                    <div class="partner-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Nokia_wordmark.svg" alt="Nokia">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg" alt="HDFC">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="assets/images/sbi.png" alt="SBI">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="assets/images/spicejet.png" alt="SpiceJet">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="assets/images/amazon.png" alt="Amazon">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="assets/images/infosys.png" alt="Infosys">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="assets/images/tcs.png" alt="TCS">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="assets/images/ibm.png" alt="IBM">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="assets/images/accenture.png" alt="Accenture">
+                    </div>
+                    
+                    <div class="partner-logo">
+                        <img src="assets/images/flipkart.png" alt="Flipkart">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1163,10 +1211,10 @@
                 <div class="contact-text">
                     <h2>Connect for any queries</h2>
                     <p>Amity Online University</p>
-                    <a href="tel:+91-8860000000" class="btn btn-primary">Call Now</a>
+                    <a href="tel:+91-9266530366" class="btn btn-primary">Call Now</a>
                 </div>
                 <div class="contact-image">
-                    <img src="assets/images/contact-person.jpg" alt="University Representative" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                    <img src="assets/images/contact-page.png" alt="University Representative" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
                 </div>
             </div>
         </div>
@@ -1186,7 +1234,7 @@
                     <a href="#contact">Contact Us</a>
                 </div>
                 <div class="copyright">
-                    <p>&copy; 2024 Amity Online University. All rights reserved.</p>
+                    <p>&copy; 2025 Amity Online University. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -1263,6 +1311,15 @@
                 floatingBtn.style.transform = 'scale(1)';
             }
         });
+
+        // Partners track duplication for seamless marquee
+        (function() {
+            const track = document.querySelector('.partners-track');
+            if (!track) return;
+
+            // Duplicate content to allow continuous scrolling
+            track.innerHTML = track.innerHTML + track.innerHTML;
+        })();
     </script>
 </body>
 </html>
