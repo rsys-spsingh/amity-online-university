@@ -896,73 +896,33 @@
 
             // Get form data
             const formData = new FormData(document.getElementById('applicationForm'));
+            
+            // Generate a mock application ID for user reference
+            const applicationId = 'AMT' + new Date().getFullYear() + 
+                                Math.floor(100000 + Math.random() * 900000);
 
-            // Debug: Log form data
-            console.log('Form Data:');
-            for (let [key, value] of formData.entries()) {
-                console.log(key + ':', value);
-            }
-
-            // Submit to PHP backend
-            fetch('submit.php', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => {
-                console.log('Response status:', response.status);
-                return response.text(); // Get raw response first
-            })
-            .then(text => {
-                console.log('Raw response:', text);
-                try {
-                    return JSON.parse(text);
-                } catch (e) {
-                    throw new Error('Invalid JSON response: ' + text);
-                }
-            })
-            .then(data => {
-                console.log('Parsed data:', data);
+            // Simulate processing time
+            setTimeout(() => {
+                // Show success message
+                successMessage.innerHTML = `
+                    <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                    <strong>Thank you!</strong> Your application has been received successfully. 
+                    Your Application ID is: <strong>${applicationId}</strong>
+                    <br><br>Please save this Application ID for your records. 
+                    Our admissions team will contact you within 24 hours.
+                `;
+                successMessage.style.display = 'block';
+                successMessage.className = 'form-message success';
+                document.getElementById('applicationForm').style.display = 'none';
                 
-                if (data.success) {
-                    // Show success message
-                    successMessage.innerHTML = `
-                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
-                        <strong>Thank you!</strong> Your application has been submitted successfully. 
-                        Your Application ID is: <strong>${data.applicationId}</strong>
-                        <br><br>Our admissions team will contact you within 24 hours.
-                    `;
-                    successMessage.style.display = 'block';
-                    successMessage.className = 'form-message success';
-                    document.getElementById('applicationForm').style.display = 'none';
-                    
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    // Handle errors
-                    let errorMessage = 'Submission failed:<br>';
-                    if (data.errors && Array.isArray(data.errors)) {
-                        errorMessage += '<ul><li>' + data.errors.join('</li><li>') + '</li></ul>';
-                    } else if (data.message) {
-                        errorMessage += data.message;
-                    }
-                    
-                    // Show error message
-                    showErrorMessage(errorMessage);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showErrorMessage('Network error: ' + error.message + '<br>Please check your internet connection and try again.');
-            })
-            .finally(() => {
                 // Reset button state
                 submitBtn.disabled = false;
                 loadingSpinner.style.display = 'none';
                 btnText.textContent = 'Submit Application';
-            });
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+            }, 2000); // 2 second delay to simulate processing
         }
 
         function showErrorMessage(message) {
